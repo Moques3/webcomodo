@@ -1,0 +1,21 @@
+:root{
+    --gray-one: rgba(70, 66, 66, 0.322);
+    --blue-one: rgb(96, 127, 228);
+    --blue-two: rgb(74, 24, 168);
+}
+
+
+
+*{
+    box-sizing: border-box;
+}
+    body{
+        padding: 0;
+        margin: 0;
+    }
+    body,
+    h1,h2,h3,h4,h5,h6,
+    p,
+    a{
+        font-family: 'Roboto Flex', sans-serif;
+    }
