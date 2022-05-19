@@ -72,8 +72,41 @@ form{
     border-radius: 5px;
     text-transform: uppercase;
     font-weight: 700;
+    cursor: pointer;
+    transition:0.2s ease-in-out;
+}
+#formButton:hover{
+    background-color: var(--blue-two);
 }
 
+@media(max-width:1060px) {
+    .formApp{
+        width: 78%;
+    }
+}
 
+ @media(max-width:925px){
+    .formApp{
+        width: auto;
+        flex-direction: column;
+    }
+    #formButton{
+        width: 100%;
+    }
+}
+@media(max-width: 789px){
+    .formTitle{
+        width: 60%;
+    }
+}
+@media(max-width:394px){
+    .formTitle{
+        padding: 5% 3%;
+        width: 97%;
+    }
+    .container_input > input{
+        width: 55%;
+    }
+}
  
 
