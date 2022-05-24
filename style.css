@@ -13,16 +13,31 @@
 .formTitle {
     text-align: center;
     width: 30%;
+    margin-top: -90px;
 }
 form{
     position: relative;
-    margin-top: 25px;
+    margin-top: 90px;
     padding: 20px;
     border: 1px solid var(--gray-one);
     width: 68%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+
+}
+#mensagem {
+    position: absolute;
+    top: -100px;
+    width: 100%;
+    padding: 15px;
+    background-color: #cf2b2b;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+#mensagem.hidden {
+    display: none;
 }
 .container_input{
     display: flex;
@@ -36,7 +51,7 @@ form{
     align-items: center;
     justify-content: center;
     background-color: var(--blue-one);
-    color: #fff;
+    color: black;
     padding: 0 15px;
     border-radius: 5px 0 0 5px;
 }
@@ -68,7 +83,7 @@ form{
     padding: 15px;
     border: 0;
     background-color: var(--blue-one);
-    color: #fff;
+    color: black;
     border-radius: 5px;
     text-transform: uppercase;
     font-weight: 700;
