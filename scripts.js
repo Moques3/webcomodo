@@ -1,60 +1,51 @@
-// let nomeUsr;
-// let button;
-
-// button = document.getElementById("btnEnviar");
-
-// button.addEventListener('click',(e) => {
-// e.preventDefault();
-
-// nomeUsr =document.getElementById("nomeUsr").value;
-
-//     alert(nomeUsr);
-// });
-
-// $("#btnEnviar").on('click', (e) => {
-//     e.preventDefault();
-
-//     alert($("#nomeUsr").Val());
-// })
-
-// let parede = {
-// 'altura':0,
-// 'largura':0,
-// 'nmrPortas':0,
-// 'nmrJanelas':0
-// }
-
 let comodo = [];
 let paredeAtual = 1;
 let mensagem = "";
 let campoMensagem = $("#mensagem");
 
 // funções
+function calculaTintaNecessaria(comodo) {
+    let area1 = (comodo[0].altura*1) * (comodo[0].largura * 1);
+    let area2 = (comodo[1].altura*1) * (comodo[1].largura * 1);
+    let area3 = (comodo[2].altura*1) * (comodo[2].largura * 1);
+    let area4 = (comodo[3].altura*1) * (comodo[3].largura * 1);
+
+
+    let areaJanelas = (comodo[0].nmrJanelas * 2.4) + (comodo[1].nmrJanelas * 2.4) + (comodo[2].nmrJanelas * 2.4) + (comodo[3].nmrJanelas * 2.4);
+    let areaPortas = (comodo[0].nmrPortas * 1.52) + (comodo[1].nmrPortas * 1.52) + (comodo[2].nmrPortas * 1.52) + (comodo[3].nmrPortas * 1.52);
+
+
+    
+    let areaTotal = area1 + area2 + area3 + area4;
+    areaTotal = areaTotal - (areaJanelas + areaPortas);
+
+    alert(areaTotal);
+   
+}
+
 function atualizaParedeAtual() {
-    if (comodo.length > 0) {
+    if ((comodo.length > 0) && comodo.length < 4) {
         paredeAtual = comodo.length + 1;
+    }
+    if (comodo.length == 4) {
+        $("#btnCalc").removeClass('hidden');
+        $("#formButton").prop('disabled', true);
     }
 
     $('#textoParede').text("Parede " + paredeAtual);
 }
 
-function validaParede(altura, largura, nmrPortas, nmrJanelas) {
-    if (verificaAreaParede(altura, largura) == true) {
-
-    }
-    else{
-
-    }
-}
-
 function verificaAreaParede(altura, largura) {
     let area = altura * largura;
+
+    // console.log(altura, largura);
 
     if (area >= 1 && area <= 15)
         return true;
     else
         return false;
 }
+
 function verificaAlturaParede(nmrPortas, altura) {
     if ((nmrPortas > 0 && (altura - 0.3) >= 1.9) || nmrPortas == 0) 
          return true;
@@ -68,15 +59,16 @@ function proporcaoParede(nmrPortas, nmrJanelas, altura, largura){
     let areaPortas  =  nmrPortas * 1.52;
 
     if ((areaJanelas + areaPortas) <= area) {
-        if (verificaAlturaParede(nmrPortas, altura) == true) {
-        comodo.push({
-            'altura':altura,
-            'largura':largura,
-            'nmrPortas':nmrPortas,
-            'nmrJanelas':nmrJanelas
-        });
+        if ((verificaAlturaParede(nmrPortas, altura) == true) && comodo.length < 4) {
+            comodo.push({
+                'altura':altura,
+                'largura':largura,
+                'nmrPortas':nmrPortas,
+                'nmrJanelas':nmrJanelas
+            });
 
-        console.log(comodo);
+            console.log(comodo);
+            atualizaParedeAtual();
         }
         else {
             mensagem = "A parede deve ter 30 cm a mais de altura que a porta!";
@@ -92,14 +84,14 @@ function proporcaoParede(nmrPortas, nmrJanelas, altura, largura){
 }
 
 function validaParede(altura, largura, nmrPortas, nmrJanelas) {
-if (verificaAreaParede(altura, largura) == true) {
-    proporcaoParede(nmrPortas, nmrJanelas, altura, largura);
-}
-else {
-     mensagem = "A área da parede deve estar entre 1 e 15 metros quadrados!";
-     campoMensagem.removeClass("hidden");
-     campoMensagem.text(mensagem);
-}
+    if (verificaAreaParede(altura, largura) == true) {
+        proporcaoParede(nmrPortas, nmrJanelas, altura, largura);
+    }
+    else {
+        mensagem = "A área da parede deve estar entre 1 e 15 metros quadrados!";
+        campoMensagem.removeClass("hidden");
+        campoMensagem.text(mensagem);
+    }
 } 
 
 $(document).ready(() => {
@@ -114,6 +106,13 @@ $('#formButton').on('click', (e) => {
     let nmrPortas = $('#portas').val();
     let nmrJanelas = $('#janelas').val();
 
+    console.log(altura, largura, nmrPortas, nmrJanelas);
+
     validaParede(altura, largura, nmrPortas, nmrJanelas);
     
+});
+$('#btnCalc').on('click', (e)=>{
+    e.preventDefault();
+
+    calculaTintaNecessaria(comodo);
 });

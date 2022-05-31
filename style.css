@@ -1,3 +1,11 @@
+/* classes de utilidade */
+.hidden {
+    display: none!important;
+}
+button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
 .container{
     position: absolute;
     left: 0;
@@ -36,9 +44,7 @@ form{
     text-align: center;
     color: white;
 }
-#mensagem.hidden {
-    display: none;
-}
+
 .container_input{
     display: flex;
     margin: 8px 0;
@@ -75,23 +81,36 @@ form{
 #textoParede{
     position: absolute;
     top: -31px;
+    
 }
-#formButton {
+.btnForm {
     position: absolute;
     bottom: -65px;
     left: 0;
     padding: 15px;
     border: 0;
-    background-color: var(--blue-one);
-    color: black;
     border-radius: 5px;
     text-transform: uppercase;
     font-weight: 700;
     cursor: pointer;
     transition:0.2s ease-in-out;
 }
+#formButton {
+    
+    background-color: var(--blue-one);
+    color: black;
+   
+}
 #formButton:hover{
     background-color: var(--blue-two);
+}
+#btnCalc {
+    margin-left: 13em;
+    background-color: goldenrod;
+}
+#btnCalc:hover {
+    background-color: rgb(97, 74, 16);
+    color: rgb(255, 255, 255);
 }
 
 @media(max-width:1060px) {
@@ -105,14 +124,20 @@ form{
         width: auto;
         flex-direction: column;
     }
-    #formButton{
+    .btnForm{
         width: 100%;
     }
+    #btnCalc {
+        margin-left: 0;
+        margin-bottom: -4.5em;
+    }
 }
+
 @media(max-width: 789px){
     .formTitle{
         width: 60%;
     }
+
 }
 @media(max-width:394px){
     .formTitle{
